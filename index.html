@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Sana · retour Withings</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #0f1416; color: #e8eef0; display: flex; min-height: 100vh;
+         align-items: center; justify-content: center; margin: 0; text-align: center; padding: 24px; }
+  a { display: inline-block; background: #2bb3a3; color: #04211d; padding: 14px 22px; border-radius: 12px;
+      font-weight: 600; text-decoration: none; margin-top: 16px; }
+  p { color: #9fb0b5; max-width: 32em; }
+</style>
+</head>
+<body>
+<div>
+  <h1>Sana</h1>
+  <p id="msg">Retour vers l'application…</p>
+  <a id="go" href="#">Ouvrir Sana</a>
+  <p>Cette page ne stocke rien : elle renvoie simplement le code d'autorisation à l'application Sana sur ce téléphone.</p>
+</div>
+<script>
+  // Withings renvoie ici avec ?code=…&state=… ; on le transmet à l'appli Android (sana://withings).
+  var q = location.search || "";
+  var link = "intent://withings" + q + "#Intent;scheme=sana;package=fr.nicothief.sana;end";
+  document.getElementById("go").href = link;
+  if (!q) document.getElementById("msg").textContent = "Aucun code reçu.";
+  else location.replace(link);
+</script>
+</body>
+</html>
